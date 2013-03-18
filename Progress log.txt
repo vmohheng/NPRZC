@@ -1,0 +1,65 @@
+Sam 200812:
+- Renamed nullmage to nullimage (for clarity)
+- Added try/except block to image loading in GameSprite constructor
+- Added burst functionatality to Weapon class (STILL BROKEN)
+  > Idea is to update weapon state on every hero update
+  > I ditched auto-fire concept so we just have two types of firing: burst and auto. Weapons that are effectively single shot will just have high cooldown time
+  > Problem likely lies in when I update the fireX and fireY coordinates of the hero class which determine the angle of the bullet to be shot
+
+
+Ant 200812:
+- Some syntax fixes to make it compilable (e.g. print a, b becomes print(a, b))
+- Fixed hero.update() method to move the hero (like every gamesprite.update() should)
+- hero.setFirePoint() is now called by hero.mouseMove() (i.e. every frame), instead of only when the mouse is clicked.
+- Revised Burst system and refiring. Instead of using time between firing. Burst is a list of times to fire stuff.
+
+Sam 200812
+- Standardized Python (and accompanying PyGame) version to 2.7.2
+- Added image rotation support with rotateSprite() to GameSprite class
+- Created helper method in Hero findAngle which computes an angle (in radians) between the horizontal plane and a given x, y position
+  > Casted division of screen size to float to fix integer rounding imprecision (previously resulting in choppy rotation)
+- Created new placeholder art for hero to test rotation
+- Added animation functionality in GameSprite (test harness in Hero)
+  > Supports options for reverting to original image after animation, looping, and loop direction (forward or backwards)
+  > Animations (list of frames) have to be loaded into a list and a 2D list of animation lists and passed to a GameSprite constructor for animation support
+
+Ant 210812:
+- Changed cursor in Game.py
+- Changed is to ==, accounting for 2.7.2 problem
+- LOADING PERCENTAGE IS TRUE
+- Removed unnecessary variables in Weapon
+- Changed Weapon.py so bullet spawns from center, with offset. So specifying R, Theta, will specify an offset.
+- Change Hero.py collision for movement so it moves smoother along walls
+- Change Hero.py findAngle to take in 2 points, instead of 1
+- Bullet's center passes through crosshair's center
+
+Sam 220812
+- Added a Map class (incomplete) and MapTest class test harness
+- Map class currently takes in a collision map, parses it into adjacent lists of tiles of a given dimension, then extracts edges from it
+- CURRENT PROBLEMS:
+  > Not sure how to simplify edges
+  > Not sure how to partition polygons if the collision areas are not closed and join over multiple pages
+  
+ 
+Ant 230812:
+- Changed weapon and hero interaction and creation
+- Do dmg method in GameSprite for sprites to take damage
+- Bug for enemies. They are firing when you fire. Hmm. (DEBUGGED FINALLY)
+- FindAngle method moved to GameSprite
+- Weapon creation classes at btm of Weapon.py. Method in hero class to change weapons
+- Screen Size now no longer passed. A constant at GameSprite.py (Need to find a way to change dynamically?). 
+- Neither is AllGroup nor Backgroundgroup. Now references GameSprite.BG, GameSprite.allsprites, GameSprite.screenSize, and GameSprite.bullets.
+- Added support for XP, as well as accuracymultiplier and dmgmultiplier in Enemies and Hero
+- Added shields for hero and enemies. Shields have a delay (when damage is taken) and a regeneration rate
+- Stamina, rolling, sprinting, for Hero
+- Added in rudimentary support for Feats on Accuracy and Survival trees (No active feats yet, not tested fully)
+
+Ant 250812:
+- Some other feats supported, not tested (TO DO list for feats not yet implemented)
+- Rudimentary reloading system
+- Weapon pickup and dropping
+- Weapon is now a sprite! It shows on your guy!
+- Better testing environment. Walls are now LINED. Also, since hero can stick gun into wall... this prevents firing through
+- Minor optimization for collision. Before checking for Mask collision, first checks for CIRCLE collision.
+- You now can't rotate if it makes you collide with a wall. HOWEVER, UNINTENTIONAL SIDE EFFECT: Your gun still points in the right direction!
+- Bullet spawn and weapon angle detection optimized. +2, +2 offset added for crosshair.

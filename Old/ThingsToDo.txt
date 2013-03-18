@@ -1,0 +1,31 @@
+Generalize the Weapon System:
+
+- Weapon.py contains a BasicWeapon and a Bullet class. 
+- Bullet is an actual Sprite and should be fine for now (might add in death animations later)
+- BasicWeapon is an example of a weapon. Generalize it so I can just extend it, set parameters, and viola, new weapon. 
+- A lot of the weapon initiation, for testing, is in Game.py. Should be taken out.
+
+On hindsight, it actually looks like it's pretty generalized hohoho. But I need to try to make the image a parameter as well. 
+
+Extend the Weapon System:
+- Recoil and burstiness and refire rates. Much like what I did in my old game. Include other things like reload and ammo etc. Damage too.
+- Think of adding a 'Radius' field as well, for the radius of the bullet to check collision. 
+- In fact, further extension can be including a few generic death methods, like exploding, etc.
+
+Control scheme:
+- Currently, one click is one bullet. This detection and execution is done in Game.py, just to test. We should get to holding the button to fire (and test refire rates). I'm thinking it can even be that an entire burst is fired at once (so even if I release the mouse button when I'm in the middle of firing a burst, the burst finishes)
+
+
+In the meantime I'll:
+- Work on bullet collision with the background. It'll be in the BasicWeapon class, but it's just a piece of code - so tell me before you work on the class. (DONE)
+- Work on making bullets start out where they should - They currently start out somewhere far off.
+- Maybe work on doing bullet-enemy collision checks.
+- Rotation!
+
+Stuff I've done (Sam):
+- Renamed nullmage to nullimage (for clarity)
+- Added try/except block to image loading in GameSprite constructor
+- Added burst functionatality to Weapon class (STILL BROKEN)
+  > Idea is to update weapon state on every hero update
+  > I ditched auto-fire concept so we just have two types of firing: burst and auto. Weapons that are effectively single shot will just have high cooldown time
+  > Problem likely lies in when I update the fireX and fireY coordinates of the hero class which determine the angle of the bullet to be shot

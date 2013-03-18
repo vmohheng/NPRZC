@@ -1,0 +1,35 @@
+
+Pathing
+(Idea from http://eli.thegreenplace.net/2009/01/09/writing-a-game-in-python-with-pygame-part-iii/)
+- Map will be represented in a separate class Map.py which will parse our map into some kind of grid
+  > Design decision: Each node of our map pixel-size or some kind of larger tile?
+- Create a class called Pathfinder.py that implements A* Search Algorithm
+  > To construct, provide it a functions of the Map.py class that gets valid adjacent nodes, calculates cost between two modes and calculates heuristic cost of a given node
+
+AI Ideas
+- Nav Mesh systems are google-able. Popular implementation seems to be the valve system, but that uses the midpoint between obstacles and such is only good for areas with lots of obstacles. Ours is more one-size fits all!
+- The assumption is this: Our collision map will ALWAYS have ONE single area to walk around in, since we have no doors. 
+- Thus, if we run a recursive fill algorithm on one point that is walkable, we can get every single point that is walkable. 
+- Alternatively just get every pixel next to the unwalkable pixels.
+- Now we have a list of every walkable point in the grid. We can extract the "outline" as every single point that is next to an unwalkable point (i.e. on collision map, every white point next to a black point that is walkable, so it has been filled by the fill algorithm)
+
+- Break this outline into convex polygons
+	- Here's the difficulty
+	- "Polygon partitioning" is google-able
+	- Sadly nothing covers the specific problem we have here
+	- Suggestion: All pixels in all 8 directions of something unwalkable, unless already unwalkable, is an "outline".
+	- First, there's the issue of "polygon approximation"
+	- I would propose:
+		- Start at one pixel on the outline.
+		- Grab the list of pixels on the outline, starting from the one next to it.
+		- Draw a line from the original pixel to every one of those pixels. Calculate angle. 
+		- Accept the longest line (between original pixel and some pixel down the outline) that has every pixel before it being at most distance 2 from it.
+		- Repeat from that pixel
+	- Now, polygon partition.
+
+
+- Now we have a list of polygons. Either a vector representation (each point has a point, angle, length) or a list (each point is just a point).
+- In addition, for heuristic computation, each polygon can contain info on its center.
+- Given 2 points, we must find out which polygon each point belongs to. Use any of the Point-in-polygon methods. Ray-casting easier for vector representation. Assumption: Dealing with SIMPLE POLYGONS only.
+
+- Given the starting and ending polygon, determine the polygon path using A* search. The heuristic should be the straight-line distance between the center of polygons. 

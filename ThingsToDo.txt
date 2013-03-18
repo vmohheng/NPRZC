@@ -1,0 +1,31 @@
+Down the road...
+
+Create first enemy:
+- Fires stuff at you
+- Can get hit
+- Turns around and stuff. Might move.
+
+Content generation:
+- One level for testing
+
+Pathing:
+- ACTUAL AI!!
+
+that's actually the entire engine!
+
+Content generation time!
+- Weapon system
+- Weapons
+
+Feats undone:
+- Lucky shot (Power tier 4)
+- Lucky spread (Accuracy tier 4)
+- Golden reload (Accuracy tier 5)
+- The whole ammo tree
+
+Bugs, tests, workarounds:
+- Currently bullets move too fast and are too small to be detected by 1 pixel collision. 
+	- 1 possible solution is to have bigger bullet masks
+	- Or thicker walls. We can "double up" each wall, so no bullet can fit between 2 walls
+	- Or with efficient enough algorithm, FULL WALLS
+- Currently, mousing over on weapons makes weird stuff happen (Fixed... sort of)
